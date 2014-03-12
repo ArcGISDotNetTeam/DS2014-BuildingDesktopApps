@@ -1,0 +1,35 @@
+﻿<Window x:Class="GeometryEngine.MainView"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:GeometryEngine"
+        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+        xmlns:converters="clr-namespace:DevSummit2014.Core.Converters;assembly=DevSummit2014.Core"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=DevSummit2014.Core"
+        xmlns:core="clr-namespace:DevSummit2014.Core;assembly=DevSummit2014.Core"
+        Title="{Binding ApplicationTitle}" 
+        Height="768" 
+        Width="1388">
+	<Grid>
+		<esri:MapView 
+            Map="{Binding Map}"
+			core:MapViewService.MapView="{Binding MapViewService}">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="MouseMove">
+					<cmd:EventToCommand Command="{Binding Mode=OneWay, Path=MouseMoveCommand}"
+                                        PassEventArgsToCommand="True" />
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</esri:MapView>
+		
+		<Border Background="White" 
+				Margin="15"
+				VerticalAlignment="Top" HorizontalAlignment="Left"
+				BorderBrush="Black" BorderThickness="1">
+			<TextBlock Margin="15" FontSize="25">
+				<Run>Total area of found states is : </Run>
+				<Run Text="{Binding TotalArea}" FontWeight="Bold"/>
+			</TextBlock>
+		</Border>
+	</Grid>
+</Window>

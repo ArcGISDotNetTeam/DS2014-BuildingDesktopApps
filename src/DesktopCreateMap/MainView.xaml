@@ -1,0 +1,33 @@
+﻿<Window x:Class="DesktopCreateMap.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:DesktopCreateMap"
+        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+        xmlns:converters="clr-namespace:DevSummit2014.Core.Converters;assembly=DevSummit2014.Core"
+        Title="{Binding ApplicationTitle}" 
+        Height="768" 
+        Width="1388">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="bool2Visibility" />
+    </Window.Resources>
+    <Grid>
+        <esri:MapView 
+            Map="{Binding Map}"   
+            ManipulationMode="All">
+        </esri:MapView>
+
+
+        <!-- Busy overlay -->
+        <Border Visibility="{Binding IsInitialized, Converter={StaticResource bool2Visibility}, ConverterParameter=!}" 
+              Background="#99000000">
+            <Grid HorizontalAlignment="Center"
+                  VerticalAlignment="Center" 
+                  Background="{StaticResource OverlayBackground}">
+                <TextBlock Text="Loading..." 
+                           Style="{StaticResource TitleTextStyle}"
+                           HorizontalAlignment="Center" Foreground="White"
+                           Grid.Row="0" Margin="15,10" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

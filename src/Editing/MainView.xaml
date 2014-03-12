@@ -1,0 +1,117 @@
+﻿<Window x:Class="Editing.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Editing"
+        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+        xmlns:converters="clr-namespace:DevSummit2014.Core.Converters;assembly=DevSummit2014.Core"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=DevSummit2014.Core"
+        xmlns:esriToolkit="clr-namespace:Esri.ArcGISRuntime.Toolkit.Controls;assembly=Esri.ArcGISRuntime.Toolkit"
+        xmlns:core="clr-namespace:DevSummit2014.Core;assembly=DevSummit2014.Core"
+        Title="{Binding ApplicationTitle}" 
+        Height="768" 
+        Width="1388">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="bool2Visibility" />
+        <converters:NullToVisibilityConverter x:Key="null2Visibility" />
+
+        <Style x:Key="FeatureAttributeLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <esri:MapView 
+            Map="{Binding Map}"   
+            Editor="{Binding Editor}"
+            core:MapViewService.MapView="{Binding MapViewService}"  
+            ManipulationMode="All">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MapViewTapped">
+                    <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SelectFeatureCommand}"
+                                        PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </esri:MapView>
+
+        <!-- Attribution to provide attribution -->
+        <esriToolkit:Attribution HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                                 Layers="{Binding Map.Layers}"
+                                 Foreground="White" Margin="10,0,0,0"/>
+        
+        <!-- Template picker to choose feature template when adding new ones -->
+        <Grid 
+            Background="White"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="10">
+            <StackPanel>
+                <TextBlock Text="Add new feature" Margin="10,0,0,0" Style="{StaticResource CaptionTextStyle}"/>
+                <esriToolkit:TemplatePicker 
+                    Layers="{Binding Path=Map.Layers}" 
+                    Margin="10" 
+                    MaxWidth="250"
+                    Background="Transparent" 
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TemplatePicked">
+                            <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=AddFeatureCommand}"
+                                        PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </esriToolkit:TemplatePicker>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Background="White"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="10">
+            <StackPanel Visibility="{Binding SelectedFeature, Converter={StaticResource null2Visibility}}" Background="White">
+                <TextBlock Text="Edit selected feature" Margin="10,0,0,0" Style="{StaticResource CaptionTextStyle}"/>
+                <esriToolkit:FeatureDataForm 
+                                         GeodatabaseFeature="{Binding SelectedFeature}"
+                                         BorderBrush="Transparent"
+                                         VerticalAlignment="Bottom" MaxHeight="400" Background="{StaticResource BackgroundColor}"      
+                                         LabelStyle="{StaticResource FeatureAttributeLabel}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ApplyCompleted">
+                            <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SaveFeatureCommand}"
+                                            PassEventArgsToCommand="False" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </esriToolkit:FeatureDataForm>
+                <Button Command="{Binding EditFeatureCommand}" 
+                        CommandParameter="{Binding SelectedFeature}"
+                        ToolTip="Edit geometry" 
+                        Margin="5"
+                        Foreground="White"
+                        Background="{StaticResource BackgroundColor}"
+                        Content="Edit geometry"/>
+                <Button Command="{Binding RemoveFeatureCommand}" 
+                        CommandParameter="{Binding SelectedFeature}"
+                        ToolTip="Remove feature" 
+                        Margin="5"
+                        Foreground="White"
+                        Background="{StaticResource BackgroundColor}"
+                        Content="Remove"/>
+            </StackPanel>
+        </Grid>
+
+
+        <!-- Busy overlay -->
+        <Border Visibility="{Binding IsInitialized, Converter={StaticResource bool2Visibility}, ConverterParameter=!}" 
+              Background="#99000000">
+            <Grid HorizontalAlignment="Center"
+                  VerticalAlignment="Center" 
+                  Background="{StaticResource OverlayBackground}">
+                <TextBlock Text="Loading..." 
+                           Style="{StaticResource TitleTextStyle}"
+                           HorizontalAlignment="Center" Foreground="White"
+                           Grid.Row="0" Margin="15,10" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
