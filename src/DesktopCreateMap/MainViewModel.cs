@@ -48,7 +48,7 @@ namespace DesktopCreateMap
             }
         }
 
-        protected override async Task InitializeAsync()
+		protected override async Task InitializeAsync()
         {
             // Create map with layers and set startup location
             var map = new Map()
@@ -62,7 +62,7 @@ namespace DesktopCreateMap
             {
                 ID = "Basemap",
                 DisplayName = "Basemap",
-                ServiceUri = "http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"
+				ServiceUri = "http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"
             };
 
             // Initialize layer in Try - Catch 

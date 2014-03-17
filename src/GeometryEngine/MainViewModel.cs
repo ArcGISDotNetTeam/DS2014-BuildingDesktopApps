@@ -132,7 +132,7 @@ namespace GeometryEngine
 			{
 				ID = "Basemap",
 				DisplayName = "Basemap",
-				Path = @"..\..\Data\TPKs\Topographic.tpk"
+				Path = @"../../../../Data/TileCaches/Topographic.tpk"
 			};
 
 			// Initialize layer in Try - Catch 
@@ -142,7 +142,8 @@ namespace GeometryEngine
 				await basemap.InitializeAsync();
 				Map.Layers.Add(basemap);
 
-				var geodatabase = await Geodatabase.OpenAsync(@"..\..\Data\usa.geodatabase");
+				// Open geodatbase and find States feature table
+				var geodatabase = await Geodatabase.OpenAsync(@"../../../../Data/Databases/usa.geodatabase");
 				_featureTable = geodatabase.FeatureTables.First(x => x.Name == "States");
 
 				// Create graphics layer for start and endpoints

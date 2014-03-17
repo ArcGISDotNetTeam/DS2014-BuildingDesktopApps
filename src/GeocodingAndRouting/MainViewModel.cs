@@ -22,6 +22,8 @@ namespace GeocodingAndRouting
 {
 	// Reverse Geocoding, routing and graphics labeling
 	//
+	//	NOTE : this demo should be run from relase .Exe to get best perfomance.
+	//
 	//	1 ) On initialization LocalRuoteTask and LocalLocatorTasks are initialized
 	//		- LocalRouteTask uses Network dataset extracted using ArcMap
 	//		- LocalLoctorTask uses locator dataset extracted using ArcMap
@@ -31,8 +33,6 @@ namespace GeocodingAndRouting
 	//		- Mouses location is got by using MapViewService helper class that uses MapView's ScreenToLocation method
 	//		- Location gets reverse geocoded and shown in the label
 	//		- Routing is done between starting location and this location
-	//		- 
-
 
     public class MainViewModel : ViewModelBase
     {
@@ -142,12 +142,11 @@ namespace GeocodingAndRouting
             Map = map;
 
             // Basemap layer from ArcGIS Online hosted service
-            var basemap = new ArcGISLocalTiledLayer()
+            var basemap = new ArcGISTiledMapServiceLayer()
             {
                 ID = "Basemap",
                 DisplayName = "Basemap",
-			//	ServiceUri = "http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer"
-				Path = @"C:\LocalDataStore\TileCache\Layers.tpk"
+				ServiceUri = "http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer"
 			};
 
             // Initialize layer in Try - Catch 
@@ -162,8 +161,8 @@ namespace GeocodingAndRouting
                 CreateRouteLayer();
 
                 // Create geocoding and routing tasks
-				_locatorTask = new LocalLocatorTask(@"C:\LocalDataStore\Locators\SanFrancisco\SanFranciscoLocator.loc");
-				_routeTask = new LocalRouteTask(@"C:\LocalDataStore\Network\RuntimeSanFrancisco.geodatabase", "Routing_ND");
+				_locatorTask = new LocalLocatorTask(@"../../../../Data/Locators/SanFrancisco/SanFranciscoLocator.loc");
+				_routeTask = new LocalRouteTask(@"../../../../Data/Networks/RuntimeSanFrancisco.geodatabase", "Routing_ND");
 				IsInitialized = true;
 			}
             catch (Exception exception)
@@ -193,6 +192,9 @@ namespace GeocodingAndRouting
             try
             {
                 var graphic = await GetGeocodedGraphicAsync(point);
+				if (graphic == null)
+					return;
+
                 graphic.Attributes.Add("PointType", "EndPoint");
 
 				// Get endpoint graphic from the layer and replace that with new location
@@ -215,7 +217,6 @@ namespace GeocodingAndRouting
             }
             catch (Exception exception)
             {
-		
             }
         }
 
@@ -357,7 +358,7 @@ namespace GeocodingAndRouting
 
             endpointLayer.Renderer = endpointLayerRenderer;
 
-			// Crate labeling definition for start and end locations
+			// Crate labeling definition for start and end locations. Shows Address attribute as a label text.
             var labelClass = new LabelClass()
             {
                 Symbol = new TextSymbol()

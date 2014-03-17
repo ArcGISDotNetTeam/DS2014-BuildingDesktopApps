@@ -169,7 +169,7 @@ namespace Editing
         }
 
         /// <summary>
-        /// Returns <see cref="MapViewService"/> that is used to control MapView
+        /// Returns <see cref="MapViewService"/> that is used to control MapView. 
         /// </summary>
         public MapViewService MapViewService
         {
@@ -240,7 +240,7 @@ namespace Editing
                 ID = "Basemap",
                 DisplayName = "Basemap",
 				//ServiceUri = "http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer"
-				Path = @"C:\LocalDataStore\TileCache\Layers.tpk"
+				Path = @"../../../../Data/TileCaches/Layers.tpk"
             };
 
             // Initialize layer in Try - Catch 
@@ -250,14 +250,14 @@ namespace Editing
                 await basemap.InitializeAsync();
                 map.Layers.Add(basemap);
                 
-                // Uncomment to this to create online layers
+                // Uncomment to this to create online layers and comment offline layers to test online editing
                 //await CreateOnlineOperationalLayersAsync();
 
-                var operationalLayers = await CreateOfflineOperationalLayersAsync(@"C:\LocalDataStore\Cache\LocalWildfire.geodatabase");
-                foreach (var layer in operationalLayers)
-                {
-                    Map.Layers.Add(layer);
-                }
+				var operationalLayers = await CreateOfflineOperationalLayersAsync(@"../../../../Data/Databases/LocalWildfire.geodatabase");
+				foreach (var layer in operationalLayers)
+				{
+					Map.Layers.Add(layer);
+				}
             }
             catch (Exception exception)
             {
@@ -330,7 +330,7 @@ namespace Editing
                 // Enable geometry editing and wait until it is done, returned geometry is the edited version.
                 var requestedGeometry = await Editor.RequestShapeAsync(requestedShape, symbol, _editingProgress);
 
-                // Create new feature based on the feature schema
+                // Create new feature based on the feature schema and give created geometry to new feature
                 var geodatabaseFeature = new GeodatabaseFeature(targetLayer.FeatureTable.Schema);
                 geodatabaseFeature.Geometry = requestedGeometry;
 
@@ -477,7 +477,7 @@ namespace Editing
                         var newLocation = await Editor.RequestPointAsync();
                         feature.Geometry = newLocation;
                         break;
-                    case GeometryType.Polyline:
+                    case GeometryType.Polyline: // Could be combined with polygon to reduce lines, but could do more stuff here if needed
                         var polyine = await Editor.EditGeometryAsync(feature.Geometry, null, _editingProgress);
                         feature.Geometry = polyine;
                         break;
@@ -555,9 +555,9 @@ namespace Editing
         {
             var layers = new List<FeatureLayer>();
 
-			// When working with files, API differs on Windows Phone / Store and WPF
+			// When working with files, API differs on Windows Phone / Store and WPF.
 			// This works for WPF and Windows Phone but for Windows Store doesn't 
-			// implement FileInfo class so this should be abstracted
+			// implement FileInfo class so this should be abstracted if targeted for multipatform.
 			//var fileInfo = new FileInfo(path);
 			//if (!fileInfo.Exists)
 			//{

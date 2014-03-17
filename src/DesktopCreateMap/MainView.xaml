@@ -16,7 +16,6 @@
             ManipulationMode="All">
         </esri:MapView>
 
-
         <!-- Busy overlay -->
         <Border Visibility="{Binding IsInitialized, Converter={StaticResource bool2Visibility}, ConverterParameter=!}" 
               Background="#99000000">
