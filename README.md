@@ -1,9 +1,9 @@
-DS2014-BuildingWPFApps
+DS2014-BuildingDesktopApps
 ======================
 
-Samples from the 2014 Developer Summit session "Building WPF Apps with the New .NET ArcGIS Runtime SDK". Samples demonstrates how to use [ArcGIS Runtime SDK for .NET](https://developers.arcgis.com/net/) to create a map, edit online and offline data, access to ArcGIS Portal and its basemap gallery, use geocoding and routing and using GeometryEngine following a Model-View-ViewModel (MVVM) implementation pattern.
+Samples from the 2014 Developer Summit session "Building WPF Apps with the New .NET ArcGIS Runtime SDK". Samples demonstrates how to use [ArcGIS Runtime SDK for .NET](https://developers.arcgis.com/net/) to create a map, edit online and offline data, access to ArcGIS Portal and its basemap gallery, use geocoding and routing and using GeometryEngine following a simplified Model-View-ViewModel (MVVM) implementation pattern.
 
-See presentation from [TO-BE-UPDATED](http://video.esri.com/ "TO-BE-UPDATED"). 
+See presentation from [TO-BE-UPDATED](http://video.esri.com/ ""). 
 
 # Demos #
 
