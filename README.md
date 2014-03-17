@@ -9,7 +9,7 @@ See presentation from [TO-BE-UPDATED](http://video.esri.com/ "").
 
 1. Creating basic map
 
-	Creating a Map in ViewModel with layers and binding that to MapView while handling initialization errors 
+	Creating a Map in ViewModel with layers and binding that to MapView while handling initialization errors. 
 
 2. Create map from Webmap
 
@@ -25,7 +25,7 @@ See presentation from [TO-BE-UPDATED](http://video.esri.com/ "").
 
 5. GeometryEngine
 
-	Using GeometryEngine to buffer, make unions and calculating area. Also demonstrates how to use GeodatabaseFeatureTable to query informtion from local geodatabase.
+	Using GeometryEngine to buffer, make unions and calculating area. Also demonstrates how to use GeodatabaseFeatureTable to query information from local geodatabase.
 
 # Content #
 
