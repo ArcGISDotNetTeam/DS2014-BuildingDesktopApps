@@ -17,3 +17,6 @@ See presentation from [TO-BE-UPDATED](http://video.esri.com/ "TO-BE-UPDATED").
 
 - [Source](https://github.com/ArcGISDotNetTeam/DS2014-BuildingDesktopApps/tree/master/src "Source")
 - [Data](https://github.com/ArcGISDotNetTeam/DS2014-BuildingDesktopApps/tree/master/data "Data")
+
+[](Esri Tags: ArcGIS Runtime SDK .NET WPF C# C-Sharp DotNet XAML DevSummit)
+[](Esri Language: DotNet)
