@@ -17,6 +17,7 @@
 
         <Style x:Key="FeatureAttributeLabel" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"></Setter>
+			<Setter Property="Margin" Value="5"></Setter>
         </Style>
     </Window.Resources>
     <Grid>
@@ -65,17 +66,20 @@
             </StackPanel>
         </Grid>
 
-        <Grid Background="White"
+		<Grid Background="White"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Margin="10">
-            <StackPanel Visibility="{Binding SelectedFeature, Converter={StaticResource null2Visibility}}" Background="White">
-                <TextBlock Text="Edit selected feature" Margin="10,0,0,0" Style="{StaticResource CaptionTextStyle}"/>
+			<StackPanel Visibility="{Binding SelectedFeature, Converter={StaticResource null2Visibility}}"
+						Background="White">
+                <TextBlock Text="Edit selected feature" Margin="10" Style="{StaticResource CaptionTextStyle}"/>
                 <esriToolkit:FeatureDataForm 
-                                         GeodatabaseFeature="{Binding SelectedFeature}"
-                                         BorderBrush="Transparent"
-                                         VerticalAlignment="Bottom" MaxHeight="400" Background="{StaticResource BackgroundColor}"      
-                                         LabelStyle="{StaticResource FeatureAttributeLabel}">
+                    GeodatabaseFeature="{Binding SelectedFeature}"
+                    BorderBrush="Transparent"
+                    VerticalAlignment="Bottom" 
+					Margin="10"
+					MaxHeight="400" Background="{StaticResource BackgroundColor}"      
+                    LabelStyle="{StaticResource FeatureAttributeLabel}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ApplyCompleted">
                             <cmd:EventToCommand Command="{Binding Mode=OneWay, Path=SaveFeatureCommand}"

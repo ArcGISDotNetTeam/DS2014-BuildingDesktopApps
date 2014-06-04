@@ -162,7 +162,7 @@ namespace GeocodingAndRouting
 
                 // Create geocoding and routing tasks
 				_locatorTask = new LocalLocatorTask(@"../../../../Data/Locators/SanFrancisco/SanFranciscoLocator.loc");
-				_routeTask = new LocalRouteTask(@"../../../../Data/Networks/RuntimeSanFrancisco.geodatabase", "Routing_ND");
+				_routeTask = new LocalRouteTask(@"../../../../Data/Networks/RuntimeSanFrancisco.geodatabase", "Streets_ND");
 				IsInitialized = true;
 			}
             catch (Exception exception)

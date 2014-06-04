@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01 - CreateMap", "DesktopCreateMap\01 - CreateMap.csproj", "{8368F0AD-CF43-4459-BD2A-EA075834E1EF}"
 EndProject
@@ -15,7 +15,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04 - GeocodingAndRouting", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05 - GeometryEngine", "GeometryEngine\05 - GeometryEngine.csproj", "{9A2A5EB4-167F-40F6-B5FE-DE1FBA28C3BF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "arcgis-toolkit-dotnet", "arcgis-toolkit-dotnet", "{3E73E197-5852-4D65-83C0-E008B5D4835B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esri.ArcGISRuntime.Toolkit.WindowsDesktop", "..\arcgis-toolkit-dotnet\src\WinDesktop\Esri.ArcGISRuntime.Toolkit\Esri.ArcGISRuntime.Toolkit.WindowsDesktop.csproj", "{1E83C102-5C9D-4A6C-B5B8-9A9202249262}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Esri.ArcGISRuntime.Toolkit.Shared", "..\arcgis-toolkit-dotnet\src\Common\Esri.ArcGISRuntime.Toolkit\Esri.ArcGISRuntime.Toolkit.Shared.shproj", "{9BEAB511-E16F-4651-A7CE-96A9F69D609B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A917C063-772E-4224-B07D-66EB29A6D320}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\arcgis-toolkit-dotnet\src\Common\Esri.ArcGISRuntime.Toolkit\Esri.ArcGISRuntime.Toolkit.Shared.projitems*{1e83c102-5c9d-4a6c-b5b8-9a9202249262}*SharedItemsImports = 4
+		..\arcgis-toolkit-dotnet\src\Common\Esri.ArcGISRuntime.Toolkit\Esri.ArcGISRuntime.Toolkit.Shared.projitems*{9beab511-e16f-4651-a7ce-96a9f69d609b}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -97,8 +114,23 @@ Global
 		{9A2A5EB4-167F-40F6-B5FE-DE1FBA28C3BF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9A2A5EB4-167F-40F6-B5FE-DE1FBA28C3BF}.Release|x64.ActiveCfg = Release|x64
 		{9A2A5EB4-167F-40F6-B5FE-DE1FBA28C3BF}.Release|x64.Build.0 = Release|x64
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Debug|x64.Build.0 = Debug|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E83C102-5C9D-4A6C-B5B8-9A9202249262} = {3E73E197-5852-4D65-83C0-E008B5D4835B}
+		{9BEAB511-E16F-4651-A7CE-96A9F69D609B} = {3E73E197-5852-4D65-83C0-E008B5D4835B}
 	EndGlobalSection
 EndGlobal
